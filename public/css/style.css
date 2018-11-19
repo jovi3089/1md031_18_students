@@ -1,0 +1,78 @@
+body {
+  font-family: arial;
+  overflow-x: hidden;
+}
+button {
+  margin-top: 30px;
+}
+button:hover {
+  background-color: orange;
+  cursor: wait;
+
+}
+section {
+  padding-left: 5px;
+  margin-left: 30px;
+  margin-right: 0px;
+}
+
+.table1 {
+  width: 75%;
+  text-align: center;
+}
+.ingredients {
+  font-weight: bold;
+}
+.burg {
+  background-color: black;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 120%;
+  text-align: center;
+}
+.meat {
+  grid-column: 1;
+  grid-row: 1;
+}
+.fish {
+  grid-column: 2;
+  grid-row: 1;
+}
+.veg {
+  grid-column: 3;
+  grid-row: 1;
+}
+.head {
+  width: 100%;
+  height: auto;
+  margin-left: 30px;
+  overflow: hidden;
+  overflow-x: hidden;
+}
+.wrapper {
+     display: grid;
+     grid-gap: 10px;
+     grid-row-gap: 10px;
+     grid-template-columns: 300px 300px 300px;
+     background-color: black;
+     color: #444;
+     padding-top: 20px;
+     padding-bottom: 5px;
+ }
+#selburg {
+  border: dashed white;
+  background-color: black;
+  color: white;
+}
+#custinfo {
+  border: dashed black;
+}
+#headimg {
+  opacity: 0.4;
+}
+#headtext {
+  position: absolute;
+  padding-top: 70px;
+  padding-left: 100px;
+  font-size: 500%;
+}
