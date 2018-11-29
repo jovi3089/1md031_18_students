@@ -1,64 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <script src="/socket.io/socket.io.js" defer></script>
+        <script type="text/javascript" src="js/menu.js" defer></script>
+        <script type="text/javascript" src="js/js_script.js" defer></script>
+        <script src="https://vuejs.org/js/vue.js" defer></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css" defer>
+        <link rel="stylesheet" href="css/deli-very.css" defer>
         <title>Buy your best burger</title>
         <meta charset="utf-8"/>
+        <script src="js/vue_script.js" defer></script>
+
         <!--<link rel="stylesheet" type="text/css" href="css/reset.css">
         -->
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-
+        <script src="/vue/vue.js" defer></script>
 
 
     </head>
     <body>
-      <div class="">
-
 
 			<main>
-        <div id="menu">
+
 
 
         <header>
           <h1 class="head" id="headtext">Welcome to BurgerHeaven</h1>
           <img class="head" id="headimg" src="http://www.joesburgerbar.com.au/wp-content/uploads/2015/10/about-us-header.jpg" alt="headerburgerplace">
         </header>
+        <div class="index" id="index">
   			<section id="selburg">
           <h4>Select Burger</h4>
           <p>
             This is where you execute burger selection
           </p>
+
           <div class="wrapper">
-
-
-
             <div class="burg" v-for="burger in menuItems" v-if="burger.stock > 0">
               <h3>{{burger.name}}</h3>
-              <img :src="burger.img">
+              <img id="burgimg" :src="burger.img">
               <ul>
                 <li>{{burger.kCal}}</li>
                 <li v-if="burger.lactose">Contains lactose</li>
               </ul>
-
+              <input v-model="pickedBurg" :value="burger.name" type="checkbox">Pick me<br>
             </div>
-
-
-              <!--   <img  class="burger":src="burger.img" alt="burger.alt">
-            <div class="burg meat">
-              <p>Meat burger</p>
-              <img src="https://www.chatelaine.com/wp-content/uploads/2017/05/Bibimbap-homemade-burgers.jpg" alt="Meat Burger" width=100%>
-              <ul id="meatBurg"></ul>
-            </div>
-            <div class="burg fish">
-              <p>Fish burger</p>
-              <img src="https://www.flcbalbriggan.ie/wp-content/uploads/2017/01/FLC-Fish-Burger.jpg" alt="Fish burger" width=100%>
-                <ul id="fishBurg"></ul>
-            </div>
-            <div class="burg veg">
-              <p>Vegan burger</p>
-              <img src="https://joyfoodsunshine.com/wp-content/uploads/2017/04/Baked-Sweet-Potato-Black-Bean-Veggie-Burgers-gluten-free-4.jpg" alt="Vegan Burger" width=100%>
-              <ul id="vegBurg">
-              </ul>
-            </div> -->
           </div>
   			</section>
 
@@ -69,21 +54,12 @@
   				<h5>Delivery information:</h5>
           <p>
             <label for="fullname">Full name</label><br>
-            <input type="text" id="fullname" name="fn" required="required" placeholder="First- and lastname">
+            <input v-model="fullName" placeholder="First- and lastname">
           </p>
           <p>
             <label for="email">E-mail</label><br>
             <input type="email" id="email" name="em" required="required" placeholder="E-mail address">
           </p>
-          <p>
-            <label for="streetname">Street</label><br>
-            <input type="streetname" id="streetname" name="sn" required="required" placeholder="Street name">
-          </p>
-          <p>
-            <label for="housenr">House</label><br>
-            <input type="housenr" id="housenr" name="ln" placeholder="House number">
-          </p>
-
           <p>
             <label for="payment">Payment options</label><br>
             <select id="payment" name="rcp">
@@ -101,16 +77,30 @@
             </label>
           </p>
   			</section>
-        <!--
-        <button id="subBut" type="submit"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG36xYfKKdoB5L6TTV9A0pq2VUu8JhsuUWWKSgdy5nh6IIj5_E" width=100>
-        </button>  -->
-        <div id="subBut">
-          <button v-on:click="markDone()"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG36xYfKKdoB5L6TTV9A0pq2VUu8JhsuUWWKSgdy5nh6IIj5_E" width=100>
-          </button>
-        </div>
-        <div >
 
+        <button id="subBut" v-on:click="markDone()" ><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG36xYfKKdoB5L6TTV9A0pq2VUu8JhsuUWWKSgdy5nh6IIj5_E" width=100>
+        </button>
+        <div v-if="orderInfo.finished">
+          <p v-for="stuff in orderInfo">
+            {{stuff}}
+          </p>
         </div>
+          <div class="view-box">
+            <div id="dots" v-on:click="displayOrder" >
+                <div
+                  v-bind:style="{ left: orders.details.xx + 'px', top: orders.details.yy + 'px'}">
+                  T
+                </div>
+            </div>
+            <!--
+            <div id="dots" v-on:click="displayOrder">
+                <div
+                  v-bind:style="{ left: orders.details.xx + 'px', top: orders.details.yy + 'px'}">
+                  T
+                </div>
+            </div>
+            -->
+          </div>
         </div>
       </main>
       <footer>
@@ -120,10 +110,10 @@
         </p>
       </footer>
       </div>
-      <script src="https://vuejs.org/js/vue.js"></script>
-      <script type="text/javascript" src="js/menu.js"></script>
-      <script type="text/javascript" src="js/js_script.js"></script>
-      <script src="js/vue_script.js"></script>
+
+
+
+
 
     </body>
 </html>
